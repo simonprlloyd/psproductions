@@ -341,19 +341,42 @@
   <div class="hero-ring hero-ring-1"></div>
   <div class="hero-ring hero-ring-2"></div>
   <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-tag"><span class="hero-tag-line"></span>Oregon's Premier Short-Form Studio</div>
-    <h1>Content That<br><em>Stops</em> The Scroll</h1>
-    <p class="hero-sub">Professional video production and editing for businesses ready to dominate social media, reels, and paid ads.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="navTo('pricing')">View Packages</button>
-      <button class="btn-ghost" onclick="navTo('about')">Our Story</button>
+
+  <div class="hero-inner">
+    <!-- LEFT: Text -->
+    <div class="hero-content">
+      <div class="hero-tag"><span class="hero-tag-line"></span>Oregon's Premier Short-Form Studio</div>
+      <h1>Content That<br><em>Stops</em> The Scroll</h1>
+      <p class="hero-sub">Professional video production and editing for businesses ready to dominate social media, reels, and paid ads.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="navTo('pricing')">View Packages</button>
+        <button class="btn-ghost" onclick="navTo('about')">Our Story</button>
+      </div>
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-txt">Oregon-Based · Available Now</span>
+      </div>
     </div>
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      <span class="badge-txt">Oregon-Based · Available Now</span>
+
+    <!-- RIGHT: Phone mockup with video -->
+    <div class="hero-phone-wrap">
+      <div class="phone-glow"></div>
+      <div class="phone-mockup-outer">
+        <div class="phone-reel-badge">▶ Live Reel</div>
+        <div class="phone-mockup">
+          <video class="phone-video" autoplay muted loop playsinline preload="auto" id="heroVideo">
+            <source src="https://res.cloudinary.com/dycutbccb/video/upload/f_auto,q_auto/v1777505507/precision_reel_pt1_kzeyrk.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/dycutbccb/video/upload/v1777505507/precision_reel_pt1_kzeyrk.mp4" type="video/mp4">
+          </video>
+          <div class="phone-ui-bar">
+            <div class="phone-ui-handle"></div>
+            <div class="phone-ui-text"><span>P.S. Productions</span> · Real client reel</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span class="scroll-txt">Scroll to explore</span>
