@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="P.S. Productions — Oregon's premier short-form video production studio. Scroll-stopping content for businesses." />
+<title>P.S. Productions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C; --gold2: #E8C97A; --blk: #0A0A0A;
+    --ch: #1A1A1A; --ch2: #111111; --w: #fff;
+    --muted: rgba(255,255,255,.52); --dim: rgba(255,255,255,.3);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: var(--sans); background: var(--blk); color: var(--w); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(201,168,76,.3); color: #fff; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--blk); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,.35); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    transition: background .3s, padding .3s, border-color .3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,.95); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,.15); padding: .9rem 3rem;
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.6); cursor: pointer; transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    padding: .55rem 1.4rem; border: 1px solid var(--gold); color: var(--gold);
+    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+    background: transparent; font-family: var(--sans); transition: all .2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--blk); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--w); transition: all .3s; }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: var(--blk); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: var(--serif); font-size: 2rem; font-weight: 700; cursor: pointer; transition: color .2s; }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close { position: absolute; top: 1.5rem; right: 2rem; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--w); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 3rem 5rem; position: relative; overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 65% 80% at 78% 50%, rgba(201,168,76,.08) 0%, transparent 68%), radial-gradient(ellipse 35% 50% at 15% 85%, rgba(201,168,76,.04) 0%, transparent 55%); }
+  .hero-ring { position: absolute; border-radius: 50%; }
+  .hero-ring-1 { top: -220px; right: -220px; width: 850px; height: 850px; border: 1px solid rgba(201,168,76,.05); }
+  .hero-ring-2 { top: -110px; right: -110px; width: 560px; height: 560px; border: 1px solid rgba(201,168,76,.09); }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,.025) 1px, transparent 1px); background-size: 78px 78px; }
+  .hero-content { position: relative; z-index: 1; max-width: 760px; }
+  .hero-tag { display: flex; align-items: center; gap: .7rem; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; animation: fadeUp .6s .1s both; }
+  .hero-tag-line { display: block; width: 2rem; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: var(--serif); font-size: clamp(3.2rem, 8vw, 6.5rem); font-weight: 900; line-height: .95; letter-spacing: -.02em; margin-bottom: 1.3rem; animation: fadeUp .7s .2s both; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); font-weight: 300; max-width: 420px; line-height: 1.75; margin-bottom: 2.2rem; animation: fadeUp .7s .35s both; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; animation: fadeUp .7s .5s both; }
+  .btn-primary { padding: .9rem 2rem; background: var(--gold); color: var(--blk); border: none; font-size: .82rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; font-family: var(--sans); transition: background .2s; }
+  .btn-primary:hover { background: var(--gold2); }
+  .btn-ghost { padding: .9rem 2rem; border: 1px solid rgba(255,255,255,.25); color: var(--w); background: transparent; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; font-family: var(--sans); transition: all .2s; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-badge { display: inline-flex; align-items: center; gap: .5rem; padding: .38rem .95rem; border: 1px solid rgba(201,168,76,.22); background: rgba(201,168,76,.05); animation: fadeUp .7s .65s both; }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  .badge-txt { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+  .hero-wm { position: absolute; bottom: -80px; right: -30px; font-family: var(--serif); font-size: 20rem; font-weight: 900; color: rgba(201,168,76,.022); line-height: 1; pointer-events: none; user-select: none; }
+  .hero-scroll { position: absolute; bottom: 2.5rem; left: 3rem; display: flex; align-items: center; gap: .75rem; animation: fadeUp .7s .8s both; }
+  .scroll-line { width: 40px; height: 1px; background: rgba(255,255,255,.1); position: relative; overflow: hidden; }
+  .scroll-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--gold); animation: scrollLine 2.2s ease-in-out infinite; }
+  .scroll-txt { font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.25); }
+
+  /* ── STATS ── */
+  .stats-bar { background: var(--ch); border-top: 1px solid rgba(201,168,76,.15); border-bottom: 1px solid rgba(201,168,76,.15); padding: 2rem 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .stat { text-align: center; }
+  .stat-num { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; color: var(--gold); display: block; line-height: 1; }
+  .stat-lbl { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.38); margin-top: .4rem; display: block; }
+
+  /* ── SECTION SHARED ── */
+  .section { padding: 6rem 3rem; }
+  .section.dark { background: var(--ch); }
+  .section.mid { background: var(--ch2); }
+  .sec-tag { display: flex; align-items: center; gap: .65rem; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .65rem; }
+  .sec-tag-line { display: block; width: 1.4rem; height: 1px; background: var(--gold); }
+  .sec-title { font-family: var(--serif); font-size: clamp(1.8rem, 3.8vw, 2.7rem); font-weight: 700; line-height: 1.1; margin-bottom: 3rem; }
+  .sec-title em { font-style: italic; color: var(--gold); }
+
+  /* ── SERVICES ── */
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,.1); }
+  .svc-card { background: var(--ch); padding: 2.5rem 2rem; position: relative; overflow: hidden; cursor: default; transition: background .3s; }
+  .svc-card:hover { background: #222; }
+  .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .35s; }
+  .svc-card:hover::before { transform: scaleX(1); }
+  .svc-num { font-family: var(--serif); font-size: 3.8rem; font-weight: 900; color: rgba(201,168,76,.07); line-height: 1; display: block; margin-bottom: .6rem; }
+  .svc-ico { font-size: 1.4rem; margin-bottom: .85rem; display: block; }
+  .svc-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; margin-bottom: .65rem; }
+  .svc-desc { font-size: .875rem; color: rgba(255,255,255,.48); line-height: 1.75; font-weight: 300; margin-bottom: 1.3rem; }
+  .svc-tags { display: flex; gap: .45rem; flex-wrap: wrap; }
+  .svc-tag { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: .22rem .55rem; border: 1px solid rgba(201,168,76,.25); color: rgba(201,168,76,.7); }
+
+  /* ── PRICING ── */
+  .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+  .pkg { border: 1px solid rgba(255,255,255,.08); padding: 2.5rem 2rem; position: relative; transition: border-color .3s; cursor: default; }
+  .pkg:hover { border-color: rgba(201,168,76,.35); }
+  .pkg.featured { border-color: var(--gold); background: rgba(201,168,76,.04); }
+  .feat-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--blk); font-size: .6rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; padding: .28rem 1rem; }
+  .pkg-tier { font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .pkg-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin-bottom: .3rem; }
+  .pkg-sub { font-size: .78rem; color: rgba(255,255,255,.32); margin-bottom: 1.1rem; }
+  .pkg-price { font-family: var(--serif); font-size: 2.3rem; font-weight: 900; margin-bottom: 1.1rem; }
+  .pkg-price span { font-size: .95rem; font-weight: 400; color: rgba(255,255,255,.32); }
+  .pkg-div { height: 1px; background: rgba(255,255,255,.08); margin-bottom: 1.1rem; }
+  .pkg-features { list-style: none; margin-bottom: 1.75rem; }
+  .pkg-features li { font-size: .83rem; color: rgba(255,255,255,.55); padding: .38rem 0; display: flex; align-items: center; gap: .55rem; }
+  .pkg-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  .pkg-cta { display: block; width: 100%; padding: .82rem; font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; cursor: pointer; transition: all .2s; font-family: var(--sans); text-align: center; }
+  .pkg-cta.ghost { border: 1px solid rgba(255,255,255,.2); color: var(--w); background: transparent; }
+  .pkg-cta.ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .pkg-cta.solid { border: none; background: var(--gold); color: var(--blk); font-weight: 500; }
+  .pkg-cta.solid:hover { background: var(--gold2); }
+  .oneoff { border: 1px solid rgba(255,255,255,.07); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+  .oo-label { font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .3rem; }
+  .oo-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; }
+  .oo-sub { font-size: .78rem; color: rgba(255,255,255,.32); margin-top: .3rem; }
+  .oo-prices { display: flex; gap: 2rem; }
+  .oo-item { text-align: center; }
+  .oo-qty { font-size: .65rem; color: rgba(255,255,255,.38); display: block; margin-bottom: .25rem; }
+  .oo-price { font-size: 1.05rem; font-weight: 500; }
+
+  /* ── ABOUT ── */
+  .about-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center; }
+  .about-vis { position: relative; overflow: hidden; border: 1px solid rgba(201,168,76,.3); min-height: 400px; }
+  .about-vis svg { display: block; width: 100%; height: 100%; }
+  .vis-corner { position: absolute; width: 22px; height: 22px; pointer-events: none; z-index: 2; }
+  .vis-tl { top: 10px; left: 10px; border-top: 1.5px solid rgba(201,168,76,.6); border-left: 1.5px solid rgba(201,168,76,.6); }
+  .vis-br { bottom: 10px; right: 10px; border-bottom: 1.5px solid rgba(201,168,76,.6); border-right: 1.5px solid rgba(201,168,76,.6); }
+  .about-text { font-size: .93rem; color: rgba(255,255,255,.52); line-height: 1.8; margin-bottom: 1.2rem; font-weight: 300; }
+  .team-duo { display: flex; gap: 1.1rem; margin-top: 2.2rem; }
+  .team-card { flex: 1; border: 1px solid rgba(255,255,255,.08); padding: 1.2rem; transition: border-color .2s; cursor: default; }
+  .team-card:hover { border-color: rgba(201,168,76,.4); }
+  .team-role { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .team-name { font-family: var(--serif); font-size: 1rem; font-weight: 700; }
+  .team-desc { font-size: .78rem; color: rgba(255,255,255,.42); margin-top: .35rem; line-height: 1.55; }
+
+  /* ── PROCESS ── */
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; gap: 1rem; }
+  .process-steps::before { content: ''; position: absolute; top: 27px; left: 12.5%; right: 12.5%; height: 1px; background: rgba(201,168,76,.2); }
+  .step { padding: 0 .75rem; cursor: default; }
+  .step-num { width: 54px; height: 54px; border-radius: 50%; border: 1px solid rgba(201,168,76,.3); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 1.3rem; background: var(--ch2); position: relative; z-index: 1; transition: all .3s; }
+  .step:hover .step-num { background: var(--gold); color: var(--blk); border-color: var(--gold); }
+  .step-title { font-family: var(--serif); font-size: 1rem; font-weight: 700; margin-bottom: .45rem; }
+  .step-desc { font-size: .8rem; color: rgba(255,255,255,.42); line-height: 1.65; }
+
+  /* ── CTA BANNER ── */
+  .cta-banner { padding: 6rem 3rem; text-align: center; background: var(--ch2); border-top: 1px solid rgba(201,168,76,.08); position: relative; overflow: hidden; }
+  .cta-wm { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--serif); font-size: 18rem; font-weight: 900; color: rgba(201,168,76,.022); line-height: 1; pointer-events: none; white-space: nowrap; }
+  .cta-banner h2 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .cta-banner h2 em { font-style: italic; color: var(--gold); }
+  .cta-sub { color: rgba(255,255,255,.42); font-size: .98rem; max-width: 380px; margin: 0 auto 2.4rem; font-weight: 300; position: relative; z-index: 1; }
+  .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  /* ── CONTACT ── */
+  .contact-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+  .contact-left-text { font-size: .93rem; color: rgba(255,255,255,.5); line-height: 1.8; font-weight: 300; margin-bottom: 1.75rem; }
+  .c-info { margin-bottom: 1.75rem; }
+  .c-info-row { display: flex; justify-content: space-between; padding: .6rem 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: .78rem; }
+  .c-info-label { color: rgba(255,255,255,.32); }
+  .c-form { display: flex; flex-direction: column; gap: 1rem; }
+  .c-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .c-field { display: flex; flex-direction: column; gap: .38rem; }
+  .c-label { font-size: .65rem; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.38); }
+  .c-input { padding: .72rem 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); color: var(--w); font-size: .88rem; font-family: var(--sans); outline: none; width: 100%; transition: border-color .2s; }
+  .c-input:focus { border-color: rgba(201,168,76,.6); }
+  .c-input::placeholder { color: rgba(255,255,255,.22); }
+  select.c-input { appearance: none; cursor: pointer; }
+  select.c-input option { background: var(--ch); }
+  textarea.c-input { height: 115px; resize: vertical; }
+  .c-submit { padding: .95rem; background: var(--gold); color: var(--blk); border: none; font-size: .82rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; cursor: pointer; font-family: var(--sans); transition: background .2s; }
+  .c-submit:hover { background: var(--gold2); }
+  .c-success { display: none; text-align: center; padding: 2rem; border: 1px solid rgba(201,168,76,.3); background: rgba(201,168,76,.05); }
+  .c-success-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: .75rem; }
+  .c-success-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin-bottom: .5rem; }
+  .c-success-sub { font-size: .85rem; color: rgba(255,255,255,.48); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--blk); border-top: 1px solid rgba(255,255,255,.06); padding: 3rem 3rem 2rem; }
+  .ft-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem; }
+  .ft-logo { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-bottom: .4rem; }
+  .ft-logo span { color: var(--gold); }
+  .ft-tagline { font-size: .72rem; color: rgba(255,255,255,.3); }
+  .ft-links { display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
+  .ft-link { font-size: .75rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.35); cursor: pointer; transition: color .2s; }
+  .ft-link:hover { color: var(--gold); }
+  .ft-divider { height: 1px; background: rgba(255,255,255,.06); margin-bottom: 1.5rem; }
+  .ft-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+  .ft-copy { font-size: .7rem; color: rgba(255,255,255,.22); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollLine { 0% { left: -100%; } 100% { left: 100%; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: .85rem 1.5rem; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero { padding: 7rem 1.5rem 5rem; }
+    .hero-scroll { left: 1.5rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .pkg-grid { grid-template-columns: 1fr; }
+    .oneoff { flex-direction: column; }
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .process-steps::before { display: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .c-row { grid-template-columns: 1fr; }
+    .cta-banner { padding: 4rem 1.5rem; }
+    footer { padding: 2.5rem 1.5rem 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 3rem; }
+    .hero-btns { flex-direction: column; }
+    .team-duo { flex-direction: column; }
+    .process-steps { grid-template-columns: 1fr; }
+    .cta-wm { font-size: 8rem; }
+    .oo-prices { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <a onclick="navTo('services');closeMobile()">Services</a>
+  <a onclick="navTo('pricing');closeMobile()">Pricing</a>
+  <a onclick="navTo('about');closeMobile()">About</a>
+  <a onclick="navTo('process');closeMobile()">Process</a>
+  <a onclick="navTo('contact');closeMobile()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span>P.S.</span> Productions</div>
+  <ul class="nav-links">
+    <li><a onclick="navTo('services')">Services</a></li>
+    <li><a onclick="navTo('pricing')">Pricing</a></li>
+    <li><a onclick="navTo('about')">About</a></li>
+    <li><a onclick="navTo('process')">Process</a></li>
+    <li><a onclick="navTo('contact')">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="navTo('contact')">Book a Call</button>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="hero-tag-line"></span>Oregon's Premier Short-Form Studio</div>
+    <h1>Content That<br><em>Stops</em> The Scroll</h1>
+    <p class="hero-sub">Professional video production and editing for businesses ready to dominate social media, reels, and paid ads.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="navTo('pricing')">View Packages</button>
+      <button class="btn-ghost" onclick="navTo('about')">Our Story</button>
+    </div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span class="badge-txt">Oregon-Based · Available Now</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-txt">Scroll to explore</span>
+  </div>
+  <div class="hero-wm">P.S.</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">8+</span><span class="stat-lbl">Videos per month</span></div>
+  <div class="stat"><span class="stat-num">3</span><span class="stat-lbl">Content packages</span></div>
+  <div class="stat"><span class="stat-num">48h</span><span class="stat-lbl">Turnaround time</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl">Oregon-based</span></div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="sec-tag"><span class="sec-tag-line"></span>What We Do</div>
+  <div class="sec-title">Full-Service <em>Short-Form</em> Production</div>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <span class="svc-num">01</span><span class="svc-ico">🎬</span>
+      <div class="svc-name">On-Site Filming</div>
+      <p class="svc-desc">Professional filming at your business location. We capture the raw footage that tells your story — products, team, behind-the-scenes, and more.</p>
+      <div class="svc-tags"><span class="svc-tag">Location Shoots</span><span class="svc-tag">B-Roll</span><span class="svc-tag">Interviews</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-num">02</span><span class="svc-ico">✂️</span>
+      <div class="svc-name">Short-Form Editing</div>
+      <p class="svc-desc">Scroll-stopping edits optimized for Instagram Reels, TikTok, and Facebook Ads. Hooks, captions, trending audio — all included.</p>
+      <div class="svc-tags"><span class="svc-tag">Reels</span><span class="svc-tag">TikTok</span><span class="svc-tag">Paid Ads</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-num">03</span><span class="svc-ico">📱</span>
+      <div class="svc-name">Content Strategy</div>
+      <p class="svc-desc">We don't just create — we plan. Hooks, post ideas, captions, and a full strategy so your content actually converts and grows your audience.</p>
+      <div class="svc-tags"><span class="svc-tag">Hooks</span><span class="svc-tag">Captions</span><span class="svc-tag">Post Calendar</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section dark" id="pricing">
+  <div class="sec-tag"><span class="sec-tag-line"></span>Investment</div>
+  <div class="sec-title">Transparent <em>Pricing</em></div>
+  <div class="pkg-grid">
+    <div class="pkg">
+      <span class="pkg-tier">Starter</span>
+      <div class="pkg-name">Starter Package</div>
+      <p class="pkg-sub">Perfect for small businesses</p>
+      <div class="pkg-price">$400–$600<span>/mo</span></div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-features">
+        <li><span class="pkg-dot"></span>8 videos/month (2 per week)</li>
+        <li><span class="pkg-dot"></span>1 filming day per month</li>
+        <li><span class="pkg-dot"></span>Professional editing included</li>
+        <li><span class="pkg-dot"></span>Optimized for Reels &amp; Ads</li>
+        <li><span class="pkg-dot"></span>Captions &amp; basic hooks</li>
+      </ul>
+      <button class="pkg-cta ghost" onclick="navTo('contact')">Get Started</button>
+    </div>
+    <div class="pkg featured">
+      <div class="feat-badge">Best Seller</div>
+      <span class="pkg-tier">Growth</span>
+      <div class="pkg-name">Growth Package</div>
+      <p class="pkg-sub">Most popular choice</p>
+      <div class="pkg-price">$800–$1,200<span>/mo</span></div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-features">
+        <li><span class="pkg-dot"></span>16 videos/month (4 per week)</li>
+        <li><span class="pkg-dot"></span>2 filming days per month</li>
+        <li><span class="pkg-dot"></span>Basic content strategy included</li>
+        <li><span class="pkg-dot"></span>Hooks, captions &amp; post ideas</li>
+        <li><span class="pkg-dot"></span>Priority 48h delivery guarantee</li>
+        <li><span class="pkg-dot"></span>Monthly performance review</li>
+      </ul>
+      <button class="pkg-cta solid" onclick="navTo('contact')">Get Started</button>
+    </div>
+    <div class="pkg">
+      <span class="pkg-tier">Domination</span>
+      <div class="pkg-name">Domination Package</div>
+      <p class="pkg-sub">Daily content powerhouse</p>
+      <div class="pkg-price">$1,500–$2,500<span>/mo</span></div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-features">
+        <li><span class="pkg-dot"></span>30 videos/month (daily content)</li>
+        <li><span class="pkg-dot"></span>3–4 filming days per month</li>
+        <li><span class="pkg-dot"></span>Full content strategy included</li>
+        <li><span class="pkg-dot"></span>Posting guidance &amp; scheduling</li>
+        <li><span class="pkg-dot"></span>Dedicated account management</li>
+        <li><span class="pkg-dot"></span>Priority support</li>
+      </ul>
+      <button class="pkg-cta ghost" onclick="navTo('contact')">Get Started</button>
+    </div>
+  </div>
+  <div class="oneoff">
+    <div>
+      <span class="oo-label">Flexible Option</span>
+      <div class="oo-title">One-Off Pricing</div>
+      <p class="oo-sub">Try before committing monthly</p>
+    </div>
+    <div class="oo-prices">
+      <div class="oo-item"><span class="oo-qty">1 Video</span><span class="oo-price">$75–$150</span></div>
+      <div class="oo-item"><span class="oo-qty">5 Videos</span><span class="oo-price">$250–$500</span></div>
+      <div class="oo-item"><span class="oo-qty">10 Videos</span><span class="oo-price">$500–$900</span></div>
+    </div>
+    <button class="btn-ghost" onclick="navTo('contact')">Inquire Now</button>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-inner">
+    <div class="about-vis">
+      <div class="vis-corner vis-tl"></div>
+      <div class="vis-corner vis-br"></div>
+      <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0A0A0A"/><stop offset="100%" stop-color="#161410"/></linearGradient>
+          <linearGradient id="goldS" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8B6914"/><stop offset="40%" stop-color="#C9A84C"/><stop offset="70%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#C9A84C"/></linearGradient>
+          <linearGradient id="lensG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2a2a2a"/><stop offset="100%" stop-color="#0e0e0e"/></linearGradient>
+          <radialGradient id="spot" cx="62%" cy="48%" r="45%"><stop offset="0%" stop-color="#C9A84C" stop-opacity="0.09"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></radialGradient>
+          <radialGradient id="lensIn" cx="38%" cy="35%" r="55%"><stop offset="0%" stop-color="#3a3020" stop-opacity="0.9"/><stop offset="60%" stop-color="#1a1208"/><stop offset="100%" stop-color="#080604"/></radialGradient>
+        </defs>
+        <rect width="680" height="420" fill="url(#bgG)"/>
+        <rect width="680" height="420" fill="url(#spot)"/>
+        <line x1="0" y1="0" x2="680" y2="420" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.06"/>
+        <line x1="680" y1="0" x2="0" y2="420" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.04"/>
+        <line x1="340" y1="0" x2="340" y2="420" stroke="#C9A84C" stroke-width="0.3" stroke-opacity="0.05"/>
+        <line x1="0" y1="210" x2="680" y2="210" stroke="#C9A84C" stroke-width="0.3" stroke-opacity="0.05"/>
+        <circle cx="340" cy="210" r="280" fill="none" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.07"/>
+        <circle cx="340" cy="210" r="190" fill="none" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.05"/>
+        <circle cx="340" cy="210" r="110" fill="none" stroke="#C9A84C" stroke-width="0.3" stroke-opacity="0.06"/>
+        <rect x="60" y="155" width="340" height="185" rx="8" fill="#111"/>
+        <rect x="60" y="155" width="340" height="185" rx="8" fill="none" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.4"/>
+        <rect x="60" y="120" width="340" height="42" rx="6" fill="#1a1a18"/>
+        <rect x="60" y="120" width="340" height="42" fill="none" stroke="#C9A84C" stroke-width="0.8" stroke-opacity="0.3"/>
+        <rect x="75" y="130" width="22" height="22" rx="3" fill="#0a0a0a" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.5"/>
+        <rect x="105" y="130" width="22" height="22" rx="3" fill="#0a0a0a" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.5"/>
+        <rect x="135" y="130" width="22" height="22" rx="3" fill="#0a0a0a" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.5"/>
+        <rect x="165" y="130" width="22" height="22" rx="3" fill="#C9A84C"/>
+        <text x="176" y="145" text-anchor="middle" fill="#0A0A0A" font-size="10" font-weight="700" font-family="serif">R</text>
+        <circle cx="315" cy="141" r="9" fill="#1a0a0a" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.4"/>
+        <circle cx="315" cy="141" r="5" fill="#C9A84C" fill-opacity="0.15"/>
+        <circle cx="315" cy="141" r="2.5" fill="#C9A84C" fill-opacity="0.4"/>
+        <circle cx="340" cy="141" r="7" fill="#0a1a0a" stroke="#3a6a3a" stroke-width="0.6"/>
+        <circle cx="340" cy="141" r="3" fill="#2a8a2a" fill-opacity="0.8"/>
+        <circle cx="230" cy="248" r="68" fill="url(#lensG)" stroke="#C9A84C" stroke-width="1.5" stroke-opacity="0.5"/>
+        <circle cx="230" cy="248" r="58" fill="none" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.2"/>
+        <circle cx="230" cy="248" r="52" fill="url(#lensIn)"/>
+        <circle cx="230" cy="248" r="40" fill="none" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.15"/>
+        <circle cx="230" cy="248" r="28" fill="none" stroke="#C9A84C" stroke-width="0.3" stroke-opacity="0.2"/>
+        <circle cx="230" cy="248" r="14" fill="#C9A84C" fill-opacity="0.06"/>
+        <circle cx="230" cy="248" r="6" fill="#C9A84C" fill-opacity="0.12"/>
+        <ellipse cx="218" cy="234" rx="10" ry="6" fill="#C9A84C" fill-opacity="0.18" transform="rotate(-35 218 234)"/>
+        <ellipse cx="222" cy="230" rx="4" ry="2.5" fill="white" fill-opacity="0.12" transform="rotate(-35 222 230)"/>
+        <line x1="230" y1="196" x2="230" y2="200" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.4"/>
+        <line x1="230" y1="296" x2="230" y2="300" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.4"/>
+        <line x1="178" y1="248" x2="182" y2="248" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.4"/>
+        <line x1="278" y1="248" x2="282" y2="248" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.4"/>
+        <rect x="80" y="175" width="88" height="52" rx="4" fill="#0d0d0b" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.3"/>
+        <text x="89" y="192" fill="#C9A84C" font-size="7" font-family="monospace" fill-opacity="0.5">04:32:17:08</text>
+        <text x="89" y="206" fill="#C9A84C" font-size="8" font-family="monospace" fill-opacity="0.7">4K 60fps</text>
+        <text x="89" y="220" fill="#fff" font-size="7" font-family="monospace" fill-opacity="0.35">ISO 800</text>
+        <rect x="300" y="175" width="80" height="52" rx="4" fill="#0d0d0b" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.3"/>
+        <text x="308" y="192" fill="#C9A84C" font-size="7" font-family="monospace" fill-opacity="0.5">f / 1.8</text>
+        <text x="308" y="206" fill="#C9A84C" font-size="8" font-family="monospace" fill-opacity="0.7">24mm</text>
+        <text x="308" y="220" fill="#fff" font-size="7" font-family="monospace" fill-opacity="0.35">1/250s</text>
+        <rect x="400" y="80" width="12" height="200" rx="3" fill="#1a1a18" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.3"/>
+        <rect x="413" y="92" width="38" height="176" rx="3" fill="#141412" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.25"/>
+        <rect x="451" y="92" width="12" height="176" rx="3" fill="#1a1a18" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.2"/>
+        <circle cx="432" cy="108" r="18" fill="#0d0d0b" stroke="#C9A84C" stroke-width="0.8" stroke-opacity="0.4"/>
+        <circle cx="432" cy="108" r="12" fill="none" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.2"/>
+        <circle cx="432" cy="108" r="6" fill="#C9A84C" fill-opacity="0.08"/>
+        <circle cx="432" cy="180" r="22" fill="#0d0d0b" stroke="#C9A84C" stroke-width="0.8" stroke-opacity="0.4"/>
+        <circle cx="432" cy="180" r="15" fill="none" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.2"/>
+        <circle cx="432" cy="180" r="8" fill="#C9A84C" fill-opacity="0.1"/>
+        <circle cx="432" cy="180" r="3" fill="#C9A84C" fill-opacity="0.25"/>
+        <circle cx="432" cy="252" r="18" fill="#0d0d0b" stroke="#C9A84C" stroke-width="0.8" stroke-opacity="0.4"/>
+        <circle cx="432" cy="252" r="12" fill="none" stroke="#C9A84C" stroke-width="0.4" stroke-opacity="0.2"/>
+        <circle cx="432" cy="252" r="6" fill="#C9A84C" fill-opacity="0.08"/>
+        <rect x="480" y="100" width="160" height="220" rx="6" fill="#0d0d0a" stroke="#C9A84C" stroke-width="0.8" stroke-opacity="0.2"/>
+        <rect x="492" y="112" width="136" height="8" rx="2" fill="#C9A84C" fill-opacity="0.06"/>
+        <rect x="492" y="112" width="90" height="8" rx="2" fill="#C9A84C" fill-opacity="0.25"/>
+        <rect x="492" y="128" width="136" height="6" rx="2" fill="#C9A84C" fill-opacity="0.05"/>
+        <rect x="492" y="128" width="60" height="6" rx="2" fill="#C9A84C" fill-opacity="0.15"/>
+        <rect x="492" y="142" width="136" height="6" rx="2" fill="#C9A84C" fill-opacity="0.05"/>
+        <rect x="492" y="142" width="110" height="6" rx="2" fill="#C9A84C" fill-opacity="0.2"/>
+        <line x1="492" y1="162" x2="628" y2="162" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.15"/>
+        <text x="492" y="177" fill="#C9A84C" font-size="9" font-family="monospace" fill-opacity="0.4">SCENE 01</text>
+        <text x="492" y="191" fill="#C9A84C" font-size="8" font-family="monospace" fill-opacity="0.28">Take 03</text>
+        <text x="492" y="205" fill="#C9A84C" font-size="7" font-family="monospace" fill-opacity="0.22">Oregon, USA</text>
+        <line x1="492" y1="218" x2="628" y2="218" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.12"/>
+        <rect x="492" y="228" width="136" height="5" rx="1" fill="#C9A84C" fill-opacity="0.12"/>
+        <rect x="492" y="240" width="136" height="5" rx="1" fill="#C9A84C" fill-opacity="0.08"/>
+        <rect x="492" y="252" width="136" height="5" rx="1" fill="#C9A84C" fill-opacity="0.1"/>
+        <rect x="480" y="290" width="160" height="30" fill="#C9A84C" fill-opacity="0.06" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.2"/>
+        <text x="560" y="309" text-anchor="middle" fill="#C9A84C" font-size="8" font-family="monospace" fill-opacity="0.5">P.S. PRODUCTIONS</text>
+        <text x="340" y="370" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="52" font-weight="900" fill="url(#goldS)" letter-spacing="4">P.S. Productions</text>
+        <text x="340" y="392" text-anchor="middle" font-family="monospace" font-size="9" fill="#C9A84C" fill-opacity="0.45" letter-spacing="6">OREGON · SHORT-FORM VIDEO STUDIO</text>
+        <line x1="40" y1="383" x2="195" y2="383" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.25"/>
+        <line x1="485" y1="383" x2="640" y2="383" stroke="#C9A84C" stroke-width="0.6" stroke-opacity="0.25"/>
+        <rect x="0" y="0" width="680" height="420" fill="none" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.12"/>
+        <rect x="16" y="16" width="20" height="20" fill="none" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.3"/>
+        <rect x="644" y="16" width="20" height="20" fill="none" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.3"/>
+        <rect x="16" y="384" width="20" height="20" fill="none" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.3"/>
+        <rect x="644" y="384" width="20" height="20" fill="none" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.3"/>
+      </svg>
+    </div>
+    <div>
+      <div class="sec-tag"><span class="sec-tag-line"></span>Our Story</div>
+      <div class="sec-title" style="margin-bottom:1.25rem">Two Creatives.<br><em>One Vision.</em></div>
+      <p class="about-text">P.S. Productions is a creative partnership built on one idea: local businesses deserve the same quality content as major brands. We combine on-location filming with expert short-form editing to deliver content that actually performs.</p>
+      <p class="about-text">Based in Oregon, we work with business owners who are ready to stop being invisible online and start turning viewers into customers. No bloated agencies, no long waits — just two people who care deeply about your results.</p>
+      <div class="team-duo">
+        <div class="team-card"><span class="team-role">Filmmaker</span><div class="team-name">On-Site Videographer</div><p class="team-desc">Professional filming &amp; direction — captured at your location in Oregon.</p></div>
+        <div class="team-card"><span class="team-role">Editor</span><div class="team-name">Short-Form Editor</div><p class="team-desc">Polished edits, trending hooks, and platform-optimized delivery every time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section mid" id="process">
+  <div class="sec-tag"><span class="sec-tag-line"></span>How It Works</div>
+  <div class="sec-title">Simple <em>Process.</em> Real Results.</div>
+  <div class="process-steps">
+    <div class="step"><div class="step-num">01</div><div class="step-title">Discovery Call</div><p class="step-desc">We learn your brand, goals, and the content style that fits your business best.</p></div>
+    <div class="step"><div class="step-num">02</div><div class="step-title">Filming Day</div><p class="step-desc">We come to you. Our videographer captures all the footage needed for the month.</p></div>
+    <div class="step"><div class="step-num">03</div><div class="step-title">Edit &amp; Deliver</div><p class="step-desc">Professionally edited videos delivered within 48 hours, ready to post.</p></div>
+    <div class="step"><div class="step-num">04</div><div class="step-title">Grow &amp; Repeat</div><p class="step-desc">Consistent content every week. Watch your audience and revenue grow.</p></div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-wm">PS</div>
+  <h2>Ready to Start <em>Creating?</em></h2>
+  <p class="cta-sub">Let's turn your business into a brand people can't stop watching.</p>
+  <div class="cta-btns">
+    <button class="btn-primary" onclick="navTo('contact')">Book a Free Call</button>
+    <button class="btn-ghost" onclick="navTo('pricing')">View Packages</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section dark" id="contact">
+  <div class="sec-tag"><span class="sec-tag-line"></span>Get In Touch</div>
+  <div class="sec-title">Let's Start <em>Creating</em></div>
+  <div class="contact-inner">
+    <div>
+      <p class="contact-left-text">Ready to take your business content to the next level? Fill out the form and we'll reach out within 24 hours to schedule your free discovery call.</p>
+      <div class="c-info">
+        <div class="c-info-row"><span class="c-info-label">Location</span><span>Oregon, USA</span></div>
+        <div class="c-info-row"><span class="c-info-label">Response Time</span><span>Within 24 hours</span></div>
+        <div class="c-info-row"><span class="c-info-label">Discovery Call</span><span>Free · 30 minutes</span></div>
+        <div class="c-info-row"><span class="c-info-label">Phone</span><span>(224) 944-8652 · (971) 719-8338</span></div>
+        <div class="c-info-row"><span class="c-info-label">Follow Us</span><span style="color:var(--gold)">Instagram · TikTok · Facebook</span></div>
+      </div>
+    </div>
+    <div>
+      <form class="c-form" id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="c-row">
+          <div class="c-field"><label class="c-label">Your Name *</label><input class="c-input" name="name" placeholder="Jane Smith" required /></div>
+          <div class="c-field"><label class="c-label">Business Name *</label><input class="c-input" name="business" placeholder="Your Business" required /></div>
+        </div>
+        <div class="c-row">
+          <div class="c-field"><label class="c-label">Email Address *</label><input class="c-input" type="email" name="email" placeholder="jane@yourbiz.com" required /></div>
+          <div class="c-field"><label class="c-label">Phone Number</label><input class="c-input" type="tel" name="phone" placeholder="(503) 555-0000" /></div>
+        </div>
+        <div class="c-field">
+          <label class="c-label">Package Interest</label>
+          <select class="c-input" name="package">
+            <option value="">Select a package...</option>
+            <option>Starter Package</option>
+            <option>Growth Package</option>
+            <option>Domination Package</option>
+            <option>One-Off / Custom</option>
+            <option>Just Exploring</option>
+          </select>
+        </div>
+        <div class="c-field"><label class="c-label">Tell us about your business</label><textarea class="c-input" name="message" placeholder="What kind of content are you looking for? What's your goal?"></textarea></div>
+        <button type="submit" class="c-submit">Send Message →</button>
+      </form>
+      <div class="c-success" id="formSuccess">
+        <div class="c-success-icon">✓</div>
+        <div class="c-success-title">Message Sent!</div>
+        <p class="c-success-sub">We'll be in touch within 24 hours to schedule your free discovery call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span>P.S.</span> Productions</div>
+      <div class="ft-tagline">Oregon's Premier Short-Form Studio</div>
+    </div>
+    <div class="ft-links">
+      <span class="ft-link" onclick="navTo('services')">Services</span>
+      <span class="ft-link" onclick="navTo('pricing')">Pricing</span>
+      <span class="ft-link" onclick="navTo('about')">About</span>
+      <span class="ft-link" onclick="navTo('process')">Process</span>
+      <span class="ft-link" onclick="navTo('contact')">Contact</span>
+    </div>
+  </div>
+  <div class="ft-divider"></div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2024 P.S. Productions. All rights reserved.</span>
+    <span class="ft-copy">📍 Oregon, USA</span>
+  </div>
+</footer>
+
+<script>
+  function navTo(id) {
+    closeMobile();
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  document.getElementById('mobileMenu').addEventListener('click', function(e) {
+    if (e.target === this) closeMobile();
+  });
+  window.addEventListener('scroll', function() {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
